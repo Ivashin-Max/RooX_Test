@@ -2,6 +2,12 @@ import { User } from "./queries";
 
 export interface UserCardProps {
   user: User,
-  onClick?: (user: User) => void,
+  onClick?: () => void,
 }
+
+export interface MyFormProps {
+  user: User,
+  disabled: boolean
+}
+
 
