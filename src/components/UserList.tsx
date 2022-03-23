@@ -3,8 +3,7 @@ import axios from 'axios';
 import { User } from '../types/queries'
 import EditPage from './EditPage';
 import UserCard from './UserCard';
-
-
+import env from '../static/static.json'
 
 
 const UserList = () => {
@@ -12,23 +11,22 @@ const UserList = () => {
   const [editUser, setEditUser] = useState<User>();
   const [openEdit, setOpenEdit] = useState(false);
   const [loading, setLoading] = useState(true);
+  const editPage = editUser && openEdit;
 
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    axios.get(env.url)
       .then(res => {
-
         setUsers(res.data)
         setLoading(false)
       })
   }, [])
 
 
-  const handleClick = (user: User) => {
+  const handleMore = (user: User) => {
     setEditUser(user);
     setOpenEdit(true)
   }
 
-  const editPage = editUser && openEdit;
 
   const handleSort = (sortPar: string) => {
     switch (sortPar) {
@@ -46,25 +44,24 @@ const UserList = () => {
   }
 
 
-
   return (
     <>
-      <div className='sidebar_container'>
+      <aside className='sidebar_container'>
         <p>Сортировка</p>
-        <button onClick={() => handleSort('city')}>по городу</button>
-        <button onClick={() => handleSort('company')}>по компании</button>
-      </div>
-      {!editPage && <div>
-        <p>Список пользователей</p>
-        {loading && <span className="loader"></span>}
-        {users.map((user) => {
-          return <UserCard key={user.id} user={user} onClick={() => handleClick(user)} />
-        })}
-        {!loading && <p>Найдено {users.length} пользователей</p>}
-
-
-      </div >}
-      {editPage && <EditPage user={editUser} />}
+        <button className='button button_blue' onClick={() => handleSort('city')}>по городу</button>
+        <button className='button button_blue' onClick={() => handleSort('company')}>по компании</button>
+      </aside>
+      <main className='main'>
+        {!editPage && <section className='main_list'>
+          <p className='main_header'>Список пользователей</p>
+          {loading && <span className="loader"></span>}
+          {users.map((user) => {
+            return <UserCard key={user.id} user={user} onClick={() => handleMore(user)} />
+          })}
+          {!loading && <p>Найдено {users.length} пользователей</p>}
+        </section >}
+        {editPage && <EditPage user={editUser} />}
+      </main>
     </>
   )
 }

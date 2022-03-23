@@ -1,5 +1,6 @@
 import React from 'react';
 import UserList from './components/UserList';
+
 import './styles/app.scss';
 
 function App() {
