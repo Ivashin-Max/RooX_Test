@@ -3,11 +3,23 @@
 $color-gray-dark: #BDBDBD;
 $color-gray-light: #F3F3F3;
 $color-gray-text: #A3A3A3;
-
 $color-blue: #4B51EF;
+
 $border-radius-small: 5px;
 $border-radius-big: 8px;
-$button-height:24px;
+
+$font-size-small:12px;
+
+
+button{
+  display: inline-block;
+  padding: 4px 14px;
+}
+
+:disabled{
+  color:  rgba(0, 0, 0, 0.3);
+}
+
 
 
 .App {
@@ -19,12 +31,76 @@ $button-height:24px;
     line-height: 14px;
 }
 
-button{
-  display: inline-block;
-  padding: 4px 14px;
-  border: none ;
-  cursor: pointer;
+.sidebar{
+  &_container{
+    background-color: $color-gray-dark;
+    min-width: 152px;
+    padding: 35px 3px 0 27px;
+    transition: 1s ease;
+
+    & p{
+      font-size: $font-size-small;
+    }
+
+    & button{
+      margin-top: 10px;
+    }
+
+  }
 }
+
+.main{
+  width: 438px;
+  height: 100vh;
+  padding: 19px 31px;
+  transition: 1s ease;
+
+  &_header{
+    font-weight: 700;
+    margin-bottom: 17px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    & button{
+      position: absolute;
+      bottom: -5px;
+      right: 0;
+      height: 27px;
+      transition: 1s ease;
+    }
+  }
+  &_card{
+    width: 420px;
+    height: 73px;
+    background-color: $color-gray-light;
+    margin-bottom: 14px;
+    padding: 10px;
+    border-radius: $border-radius-big;
+    font-size: 11px;
+    line-height: 13px;
+    position: relative;
+    & span{
+      color: $color-gray-text;
+      margin-right: 7px;
+    }
+    & p{
+      margin: 7px;
+    }
+    & button{
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: unset;
+      color: $color-blue;
+      font-size: $font-size-small;
+      text-decoration: none;
+
+    }
+  }
+}
+
 .edit{
   display: flex;
   flex-direction: column;
@@ -56,45 +132,12 @@ button{
   & button{
     position: absolute;
     right: 0;
-
-  }
-  &_button{
-      &_disabled{
-        border-radius: $border-radius-small;
-        color: #FFFFFF;
-          background: #AFAFAF;
- background: #52CF4F;
-          
-      }
-      &_enabled{
-       background: #AFAFAF;
- background: #52CF4F;
-      }
-    
-  }
-
-
-}
-
-.sidebar{
-  &_container{
-    background-color: $color-gray-dark;
-    min-width: 152px;
-    padding: 35px 3px 0 27px;
-
-
-    & p{
-      font-size: 12px;
-    }
-    & button{
-      margin-top: 10px;
-    }
-
   }
 }
+
+
 
 .button{
-  
   border-radius: $border-radius-small;
   color: #FFFFFF;
   font-size: 14px;
@@ -112,51 +155,7 @@ button{
  
 }
 
-.main{
-  width: 438px;
-  height: 100vh;
-  padding: 19px 31px;
 
-  &_header{
-    font-weight: 700;
-    margin-bottom: 17px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    & button{
-      height: 27px;
-    }
-  }
-  &_card{
-    width: 420px;
-    height: 73px;
-    background-color: $color-gray-light;
-    margin-bottom: 14px;
-    padding: 10px;
-    border-radius: $border-radius-big;
-    font-size: 11px;
-    line-height: 13px;
-    position: relative;
-    & span{
-      color: $color-gray-text;
-      margin-right: 7px;
-    }
-    & p{
-      margin: 7px;
-    }
-    & button{
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background-color: unset;
-      color: $color-blue;
-      font-size: 12px;
-      text-decoration: none;
-
-    }
-  }
-}
 
 .loader {
   width: 48px;
@@ -172,7 +171,6 @@ button{
   z-index: 1;
   left: 50vw;
 }
-
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -182,13 +180,38 @@ button{
   }
 } 
 
-:disabled{
-  color:  rgba(0, 0, 0, 0.3);
-  
+@media (max-width: 700px) {
+  .sidebar{
+    &_container{
+      min-width: 100px;
+      padding: 10px;
+      transition: 1s ease;
+    }
+  }
+  .main{
+    padding: 10px;
+
+    &_card{
+      width: auto;
+
+
+    }
+  }
 }
 
-:focus{
-  outline: none;
+@media (max-width: 450px) {
+   .main{
+      &_card{
+       & button{
+        bottom: 0;
+      }
+    }
+    
+    &_header button{
+      bottom: -50px;
+      right: 10px;
+    }
+  }
 }
 
 input:invalid{

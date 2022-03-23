@@ -7,7 +7,7 @@ const UserPage = (props: UserCardProps) => {
   const [disabled, setDisabled] = useState(true);
 
   return (
-    <div className="main">
+    <>
       <div className="main_header">
         <span>Профиль пользователя</span>
         <button className='button button_blue' onClick={() => setDisabled(false)}>Редактировать</button>
@@ -15,7 +15,7 @@ const UserPage = (props: UserCardProps) => {
       <div className="edit">
         <MyForm disabled={disabled} user={props.user} />
       </div>
-    </div>
+    </>
   )
 }
 
